@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Floating Button</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== WHATSAPP FLOATING BUTTON ===== */
+    .whatsapp-float {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9999;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow: hidden;
+      border-radius: 8px 0 0 8px;
+      text-decoration: none;
+      cursor: pointer;
+      width: 52px;
+      background: #25D366;
+      box-shadow: -3px 3px 12px rgba(37,211,102,0.4);
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.3s ease,
+                  background 0.3s ease;
+      animation: pulse 2.5s infinite;
+    }
+
+    .whatsapp-btn:hover {
+      width: 170px;
+      background: #1ebe5d;
+      box-shadow: -5px 5px 20px rgba(37,211,102,0.5);
+      animation: none;
+    }
+
+    .btn-label {
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      padding-left: 14px;
+      opacity: 0;
+      font-family: 'Segoe UI', sans-serif;
+      letter-spacing: 0.3px;
+      transition: opacity 0.2s ease 0.1s;
+    }
+
+    .whatsapp-btn:hover .btn-label {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      min-width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
+    }
+
+    @keyframes pulse {
+      0%   { box-shadow: -3px 3px 12px rgba(37,211,102,0.4); }
+      50%  { box-shadow: -3px 3px 24px rgba(37,211,102,0.75); }
+      100% { box-shadow: -3px 3px 12px rgba(37,211,102,0.4); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+  <div class="whatsapp-float">
+    <a
+      class="whatsapp-btn"
+      href="#"
+      target="_blank"
+      title="Chat on WhatsApp"
+      onclick="openWhatsApp(event)"
+    >
+      <span class="btn-label">WhatsApp Us</span>
+      <div class="btn-icon">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16.003 2.667C8.637 2.667 2.667 8.637 2.667 16.003c0 2.363.632 4.637 1.829 6.637L2.667 29.333l6.891-1.808a13.27 13.27 0 0 0 6.445 1.641h.003c7.363 0 13.333-5.97 13.333-13.333 0-7.365-5.97-13.166-13.336-13.166zm0 24.333a11.1 11.1 0 0 1-5.659-1.549l-.406-.241-4.09 1.073 1.091-3.977-.265-.41a11.1 11.1 0 0 1-1.704-5.893C4.97 9.848 9.848 4.97 16.003 4.97c6.152 0 11.03 4.878 11.03 11.033 0 6.155-4.878 10.997-11.03 10.997zm6.04-8.23c-.33-.165-1.955-.965-2.258-1.075-.303-.11-.524-.165-.744.165-.221.33-.854 1.075-1.048 1.296-.193.221-.385.248-.716.083-.33-.165-1.394-.514-2.655-1.64-.98-.875-1.64-1.956-1.834-2.286-.193-.33-.02-.51.145-.674.15-.148.33-.385.496-.578.165-.193.22-.33.33-.55.11-.22.055-.413-.027-.578-.083-.165-.744-1.793-1.02-2.455-.269-.644-.542-.557-.744-.567l-.635-.011c-.22 0-.578.083-.881.413-.303.33-1.158 1.131-1.158 2.759s1.186 3.202 1.351 3.422c.165.221 2.332 3.562 5.652 4.996.79.34 1.406.543 1.886.695.793.252 1.515.216 2.086.131.636-.094 1.955-.8 2.232-1.572.276-.772.276-1.433.193-1.572-.082-.138-.303-.22-.634-.385z"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    // =============================================
+    //  CONFIGURATION — apna number aur message yahan likho
+    // =============================================
+    const WHATSAPP_NUMBER = "919999999999"; // Country code + number (no + sign)
+    const WHATSAPP_MESSAGE = "Hello! I would like to know more about your services.";
+    // =============================================
+
+    function openWhatsApp(event) {
+      event.preventDefault();
+      const encodedMsg = encodeURIComponent(WHATSAPP_MESSAGE);
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
